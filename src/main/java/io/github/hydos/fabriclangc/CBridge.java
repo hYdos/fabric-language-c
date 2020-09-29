@@ -5,7 +5,7 @@ import net.fabricmc.api.ModInitializer;
 public class CBridge implements ModInitializer{
 
     static {
-        System.loadLibrary("FabricLangaugeC");
+        System.loadLibrary("FabricLangC");
     }
 
     static native void parseJniEnv();
