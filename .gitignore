@@ -27,3 +27,7 @@ bin/
 # fabric
 
 run/
+
+# Cmake
+
+FabricLangC/cmake-build-debug
