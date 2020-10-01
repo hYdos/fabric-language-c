@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-JNIEXPORT void JNICALL Java_io_github_hydos_fabriclangc_CBridge_parseJniEnv(JNIEnv *);
+JNIEXPORT void JNICALL Java_io_github_hydos_fabriclangc_CBridge_parseJniEnv(JNIEnv *, jclass, jboolean);
 
 #ifdef __cplusplus
 }

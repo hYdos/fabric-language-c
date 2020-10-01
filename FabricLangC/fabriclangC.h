@@ -7,7 +7,7 @@ struct java_parameters {
 };
 
 // For intermediary mapped stuff. Will automatically remap
-void* mc_new(int classId, char** constructorParameters, struct java_parameters parameters);
+void* mc_new(int classId, char *constructorDescriptor, char** constructorParameters, struct java_parameters parameters);
 void* mc_invokestatic(int classId, int methodId, struct java_parameters parameters);
 void* mc_invokevirtual(int classId, int methodId, void* object, struct java_parameters parameters);
 void* mc_invokeinterface(int classId, int methodId, void* object, struct java_parameters parameters);
