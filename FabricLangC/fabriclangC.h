@@ -18,5 +18,4 @@ void* java_invokestatic(char* className, char* methodName, char* methodDescripto
 void* java_invokevirtual(char* className, char* methodName, char* methodDescriptor, void* object, struct java_parameters parameters);
 void* java_invokeinterface(char* className, char* methodName, char* methodDescriptor, void* object, struct java_parameters parameters);
 
-
 #endif //FABRICLANGAUGEC_FABRICLANGC_H
