@@ -18,18 +18,10 @@ public class NativeModInitializer implements ModInitializer {
         Path extractedNativeLoc = new File(TEMP_DIR, libName).toPath();
         Path b = FabricLoader.getInstance().getModContainer(modid).get().getPath(libName);
         try {
+            Files.deleteIfExists(extractedNativeLoc);
             Files.createDirectories(Paths.get(String.valueOf(TEMP_DIR)));
             Files.copy(b, extractedNativeLoc);
             System.load(extractedNativeLoc.toAbsolutePath().toString());
-        } catch (FileAlreadyExistsException e){
-            try {
-                Files.delete(extractedNativeLoc);
-                Files.createDirectories(Paths.get(String.valueOf(TEMP_DIR)));
-                Files.copy(b, extractedNativeLoc);
-                System.load(extractedNativeLoc.toAbsolutePath().toString());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
         } catch (UnsatisfiedLinkError | IOException e) {
             System.err.println("Native code library failed to load.");
             e.printStackTrace();
