@@ -1,16 +1,18 @@
 package io.github.hydos.fabriclangc;
 
+import io.github.hydos.fabriclangc.util.ZipUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.LanguageAdapterException;
 
-public class NativeModInitializer extends CLanguageAdapter.BaseProxy implements ModInitializer {
+import java.io.IOException;
+
+public class NativeModInitializer implements ModInitializer {
 
     public NativeModInitializer(String libName) {
-        super(libName);
         try {
-            System.load(FabricLoader.getInstance().getGameDir().toAbsolutePath().toString() + "/mods/" + libName + ".so");
-        } catch (UnsatisfiedLinkError e) {
+            ZipUtils.extractAndLoadNative(libName, libName);
+        } catch (UnsatisfiedLinkError | IOException e) {
             System.err.println("Native code library failed to load.");
             e.printStackTrace();
             System.exit(69);

@@ -1,4 +1,4 @@
-package io.github.hydos.fabriclangc;
+package io.github.hydos.fabriclangc.bridge;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -19,8 +19,6 @@ public class JavaInteraction {
     }
 
     public static void printHello(){
-        System.out.println(LOGGER.getClass().getName());
-        System.out.println(LOGGER.getClass().getPackage());
         LOGGER.info("The Native Code Is Working Somehow");
     }
 

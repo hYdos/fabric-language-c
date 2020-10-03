@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.hydos.fabriclangc.CBridge"
+      "io.github.hydos.fabriclangc.bridge.CBridge"
     ]
   },
   "languageAdapters": {

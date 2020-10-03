@@ -9,29 +9,10 @@ import java.util.function.Function;
 
 public class CLanguageAdapter implements LanguageAdapter {
 
-    static {
-        proxies = new HashMap<>();
-        putProxy(ModInitializer.class, NativeModInitializer::new);
-    }
-
-    private static final HashMap<Class, Function<String, BaseProxy>> proxies;
-
-    public static void putProxy(Class classs, Function<String, BaseProxy> proxyCreator) {
-        proxies.put(classs, proxyCreator);
-    }
+    public static final String OS_LIB_FORMAT = System.getProperty("os.name").contains("Win") ? ".dll" : ".so"; //uuh... mac can be left out for now.
 
     @Override
-    public <T> T create(ModContainer mod, String value, Class<T> type) {
-        Function<String, BaseProxy> a = proxies.get(type);
-        if (a == null) return null;
-        return type.cast(a.apply(value));
-    }
-
-    public static class BaseProxy {
-        protected String libName;
-
-        public BaseProxy(String libName) {
-            this.libName = libName;
-        }
+    public <T> T create(ModContainer mod, String entrypointName, Class<T> type) {
+        return type.cast(new NativeModInitializer(entrypointName));
     }
 }

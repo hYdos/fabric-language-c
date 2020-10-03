@@ -5,17 +5,17 @@
 static JNIEnv *env;
 int inDevEnv = 0;
 
-JNIEXPORT void JNICALL Java_io_github_hydos_fabriclangc_CBridge_parseJniEnv(JNIEnv *jniEnv, jclass instance, jboolean parsedDevEnv){
+JNIEXPORT void JNICALL Java_io_github_hydos_fabriclangc_bridge_CBridge_parseJniEnv(JNIEnv *jniEnv, jclass instance, jboolean parsedDevEnv){
     env = jniEnv;
     inDevEnv = parsedDevEnv;
 
-    jclass cls = (*env)->FindClass(env, "io/github/hydos/fabriclangc/JavaInteraction");
+    jclass cls = (*env)->FindClass(env, "io/github/hydos/fabriclangc/bridge/JavaInteraction");
     jmethodID mid = (*env)->GetStaticMethodID(env, cls, "printHello", "()V");
     (*env)->CallStaticVoidMethod(env, cls, mid);
 }
 
 void *mc_new(int classId, char *constructorDescriptor, char **constructorParameters, struct java_parameters parameters) {
-    jclass class = (*env)->FindClass(env, "io/github/hydos/fabriclangc/JavaInteraction");
+    jclass class = (*env)->FindClass(env, "io/github/hydos/fabriclangc/bridge/JavaInteraction");
     jmethodID jmethodId = (*env)->GetMethodID(env, class, "instantiateMcClass", "(ILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;");
     return (*env)->NewObject(env, class, jmethodId);
 }
@@ -34,7 +34,7 @@ void *mc_invokeinterface(int classId, int methodId, void *object, struct java_pa
 
 // For raw java
 void *java_new(char *className, char **constructorParameters, struct java_parameters parameters) {
-    jclass class = (*env)->FindClass(env, "io/github/hydos/fabriclangc/JavaInteraction");
+    jclass class = (*env)->FindClass(env, "io/github/hydos/fabriclangc/bridge/JavaInteraction");
     jmethodID jmethodId = (*env)->GetMethodID(env, class, "instantiateJavaClass", "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;");
     return (*env)->NewObject(env, class, jmethodId);
 }

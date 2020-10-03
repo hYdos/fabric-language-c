@@ -1,4 +1,4 @@
-package io.github.hydos.fabriclangc;
+package io.github.hydos.fabriclangc.bridge;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -6,7 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 public class CBridge implements ModInitializer{
 
     static {
-        System.loadLibrary("FabricLangC");
+//        System.loadLibrary("FabricLangC");
     }
 
     static native void parseJniEnv(boolean isInDev);
@@ -16,6 +16,6 @@ public class CBridge implements ModInitializer{
      */
     @Override
     public void onInitialize() {
-        parseJniEnv(FabricLoader.getInstance().isDevelopmentEnvironment());
+//        parseJniEnv(FabricLoader.getInstance().isDevelopmentEnvironment());
     }
 }
