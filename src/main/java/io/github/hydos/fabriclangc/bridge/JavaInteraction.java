@@ -1,6 +1,5 @@
 package io.github.hydos.fabriclangc.bridge;
 
-import jdk.nashorn.internal.codegen.types.Type;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -10,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.objectweb.asm.Type;
 
 import java.lang.reflect.Constructor;
 
@@ -54,7 +54,7 @@ public class JavaInteraction {
     public static Object instantiateJavaClass(String className, String descriptor, Object[] constructorParams) {
         try {
             for (Constructor<?> constructor : Class.forName(className.replace('/', '.')).getDeclaredConstructors()) {
-                if (Type.getMethodDescriptor(void.class, constructor.getParameterTypes()).equals(descriptor)) {
+                if (Type.getConstructorDescriptor(constructor).equals(descriptor)) {
                     constructor.setAccessible(true);
                     return constructor.newInstance(constructorParams);
                 }
