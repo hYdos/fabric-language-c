@@ -14,6 +14,11 @@ JNIEXPORT void JNICALL Java_io_github_hydos_fabriclangc_bridge_CBridge_parseJniE
     (*env)->CallStaticVoidMethod(env, cls, mid);
 }
 
+JNIEXPORT jobject JNICALL Java_io_github_hydos_fabriclangc_bridge_CBridge_passToNative
+  (JNIEnv *env, jclass myClass, jlong id, jobject self, jobjectArray params) {
+    return self;
+}
+
 void *mc_new(int classId, char *constructorDescriptor, char **constructorParameters, struct java_parameters parameters) {
     jclass class = (*env)->FindClass(env, "io/github/hydos/fabriclangc/bridge/JavaInteraction");
     jmethodID jmethodId = (*env)->GetMethodID(env, class, "instantiateMcClass", "(ILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;");
