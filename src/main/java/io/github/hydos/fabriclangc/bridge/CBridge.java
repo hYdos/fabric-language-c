@@ -1,9 +1,8 @@
 package io.github.hydos.fabriclangc.bridge;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 
-public class CBridge implements ModInitializer{
+public class CBridge implements ModInitializer {
 
     static {
 //        System.loadLibrary("FabricLangC");
@@ -18,4 +17,6 @@ public class CBridge implements ModInitializer{
     public void onInitialize() {
 //        parseJniEnv(FabricLoader.getInstance().isDevelopmentEnvironment());
     }
+
+    public static native Object passToNative(long id, Object self, Object[] args);
 }
